@@ -11,10 +11,10 @@ import App6 from './App6';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-    // <App />
+    <App />
     // <App2/>
     // <App3 />
     // <App4/>
     // <App5/>
-    <App6/>
+    // <App6/>
 );

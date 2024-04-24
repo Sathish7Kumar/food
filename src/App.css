@@ -33,3 +33,18 @@ button{
 /* .head{
     color: rgb(50, 165, 42);
 } */
+.food-container{
+    text-align: center;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: center;
+}
+.food{
+    width: 500px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 50px;
+}
+

@@ -9,9 +9,10 @@ const CartPage = ({cart,removeCart,calcTotal,clearCart}) => {
      ? 
      <>
      <button onClick={clearCart}>Clear Cart</button>
+     <div className='food-container'>
      {cart.map((e,index)=>{
       return (
-        <div key={index}>
+        <div className='food' key={index}>
           <h2>{e.name}</h2>
           <img style={{height:"150px",width:"150px"}} src={e.image} />
           <h4>Price: {e.price}</h4>
@@ -19,6 +20,7 @@ const CartPage = ({cart,removeCart,calcTotal,clearCart}) => {
         </div>
       )
     })}
+     </div>
     <h3>Total Price : {calcTotal()}</h3>
      </> 
      : 
