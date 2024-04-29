@@ -5,6 +5,8 @@ import Product from './contextClass/Product';
 import Cart from './contextClass/Cart';
 import axios from "axios"
 import Navbar from './contextClass/Navbar';
+import NavigationBar from './NavgationBar.js/NavigationBar';
+import './App.css'
 
 
 export const FetchContext = createContext()
@@ -31,7 +33,8 @@ const App7 = () => {
   return (
     <FetchContext.Provider value={{product,setproduct,cart, setcart,cartValue, setcartValue}}>
         <BrowserRouter>
-        <Navbar/>
+        {/* <Navbar/> */}
+        <NavigationBar/>
         <Routes>
             <Route path='/' element={<Home/>} />
             <Route path='/product' element={<Product/>} />
