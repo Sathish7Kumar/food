@@ -17,6 +17,6 @@ root.render(
     // <App3 />
     // <App4/>
     // <App5/>
-    // <App6/>
-    <App7/>
+    <App6/>
+    // <App7/>
 );
