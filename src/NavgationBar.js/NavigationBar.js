@@ -1,9 +1,15 @@
-import React, { useState } from "react";
-import { FaFacebookSquare } from "react-icons/fa";
+import React, { useContext, useState } from "react";
+import { FaMobileAlt } from "react-icons/fa";
 import { TbLayoutNavbarInactive } from "react-icons/tb";
+import { FaShoppingCart } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import { FetchContext } from "../App7";
+
 
 const NavigationBar = () => {
+
+  const data  = useContext(FetchContext)
+  // const data=  {product,setproduct,cart, setcart,cartValue, setcartValue}
 
   const [showNav, setshowNav] = useState(false);
   // showNav = false
@@ -17,7 +23,7 @@ const NavigationBar = () => {
       <div className="navbar">
 
         <div className="logo">
-          <Link to="/"> <FaFacebookSquare style={{color:"blue",fontSize:"35px"}} />Shopping</Link>
+          <Link to="/"> <FaMobileAlt style={{color:"blue",fontSize:"35px"}} />Shopping</Link>
         </div>
 
         <div
@@ -32,7 +38,7 @@ const NavigationBar = () => {
         <ul className={`nav-links ${showNav ? "show" : ""}`}>
           <li><Link to='/'>Home</Link></li>
           <li><Link to='/product'>Product</Link></li>
-          <li><Link to='/cart'>Cart</Link></li>
+          <li><Link to='/cart'><FaShoppingCart style={{color:"red"}}/> {data.cartValue} </Link></li>
         </ul>
       </div>
     </>

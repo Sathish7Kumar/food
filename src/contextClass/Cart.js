@@ -1,5 +1,8 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { FetchContext } from '../App7'
+import { MdDelete } from "react-icons/md";
+import { useNavigate } from 'react-router-dom';
+
 
 const Cart = () => {
     
@@ -8,6 +11,8 @@ const Cart = () => {
     // data =  {product,setproduct,cart, setcart,cartValue, setcartValue}
 
     const [total, settotal] = useState(0)
+
+    const nav = useNavigate()
 
     useEffect(()=>{
         const newPrice = data.cart.reduce((sum, product)=> sum + product.price,0)
@@ -33,7 +38,13 @@ const Cart = () => {
       const handleClear = () =>{
         data.setcart([])
       }
-
+      
+      const handleBuy = () =>{
+        data.setcart([])
+        data.setcartValue(0)
+        alert("your order was placed , it will reach u within 2-3 days")
+        nav('/')
+      }
 
   return (
     <>
@@ -49,11 +60,12 @@ const Cart = () => {
                     <h2>{pro.name}</h2>
                     <img src={pro.image} height={150} width={150} />
                     <h2>Price : {pro.price}rs</h2>
-                    <button onClick={()=>handleClick(pro)}>Remove from Cart</button>
+                    <button style={{border:"none",backgroundColor:"none"}} onClick={()=>handleClick(pro)}><MdDelete style={{color:"red",fontSize:"25px"}}/></button>
                 </div>
             )
         })}
         <h2>Total Price : {total}</h2>
+        <button onClick={handleBuy}>Buy Now</button>
     </div>
     </> 
     : 
