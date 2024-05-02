@@ -48,6 +48,8 @@ button{
     gap: 50px;
 }
 
+/* navigation bar class */
+
 .navbar{
     background-color: #333;
     overflow: hidden;
@@ -114,4 +116,20 @@ button{
     }
   
   } 
+
+  /* crud  class*/
+
+  table{
+    width: 100%;
+    border-collapse: collapse;
+    text-align: center;
+  }
+
+  th,td{
+    border: 1px solid red;
+    padding: 5px;
+  }
+  button{
+    margin: 0 10px;
+  }
 
