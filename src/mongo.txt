@@ -1,0 +1,225 @@
+employeeDB> db.employeeDB.insert({"name":"dhoni","age":25})
+DeprecationWarning: Collection.insert() is deprecated. Use insertOne, insertMany, or bulkWrite.
+{
+  acknowledged: true,
+  insertedIds: { '0': ObjectId('66432df99e30deaa4dd14a0e') }
+}
+employeeDB> db.employeeDB.find()
+[
+  { _id: ObjectId('66432df99e30deaa4dd14a0e'), name: 'dhoni', age: 25 }
+]
+employeeDB> db.employeeDB.insertOne({"name":"raj","age":27})
+{
+  acknowledged: true,
+  insertedId: ObjectId('66432e539e30deaa4dd14a0f')
+}
+employeeDB> db.employeeDB.find()
+[
+  { _id: ObjectId('66432df99e30deaa4dd14a0e'), name: 'dhoni', age: 25 },
+  { _id: ObjectId('66432e539e30deaa4dd14a0f'), name: 'raj', age: 27 }
+]
+employeeDB> db.employeeDB.insertMany({"name":"abd","age":41})
+MongoInvalidArgumentError: Argument "docs" must be an array of documents
+employeeDB> db.employeeDB.insertMany([{"name":"abd","age":41}])
+{
+  acknowledged: true,
+  insertedIds: { '0': ObjectId('66432eb59e30deaa4dd14a10') }
+}
+employeeDB> db.employeeDB.insertMany([{"name":"abd","age":41},{"name":"sachin","age":35}])
+{
+  acknowledged: true,
+  insertedIds: {
+    '0': ObjectId('66432ed99e30deaa4dd14a11'),
+    '1': ObjectId('66432ed99e30deaa4dd14a12')
+  }
+}
+employeeDB> db.employeeDB.find()
+[
+  { _id: ObjectId('66432df99e30deaa4dd14a0e'), name: 'dhoni', age: 25 },
+  { _id: ObjectId('66432e539e30deaa4dd14a0f'), name: 'raj', age: 27 },
+  { _id: ObjectId('66432eb59e30deaa4dd14a10'), name: 'abd', age: 41 },
+  { _id: ObjectId('66432ed99e30deaa4dd14a11'), name: 'abd', age: 41 },
+  {
+    _id: ObjectId('66432ed99e30deaa4dd14a12'),
+    name: 'sachin',
+    age: 35
+  }
+]
+employeeDB> db.employeeDB.findOne()
+{ _id: ObjectId('66432df99e30deaa4dd14a0e'), name: 'dhoni', age: 25 }
+employeeDB> db.employeeDB.find({"name":"abd"})
+[
+  { _id: ObjectId('66432eb59e30deaa4dd14a10'), name: 'abd', age: 41 },
+  { _id: ObjectId('66432ed99e30deaa4dd14a11'), name: 'abd', age: 41 }
+]
+employeeDB> db.employeeDB.findOne({"name":"abd"})
+{ _id: ObjectId('66432eb59e30deaa4dd14a10'), name: 'abd', age: 41 }
+employeeDB> db.employeeDB.updateOne({"name":"abd"},$set:{"name":"RAM"})
+Uncaught:
+SyntaxError: Unexpected token, expected "," (1:43)
+
+> 1 | db.employeeDB.updateOne({"name":"abd"},$set:{"name":"RAM"})
+    |                                            ^
+  2 |
+
+employeeDB> db.employeeDB.updateOne({"name":"abd"},{$set:{"name":"RAM"}})
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+employeeDB> db.employeeDB.findOne()
+{ _id: ObjectId('66432df99e30deaa4dd14a0e'), name: 'dhoni', age: 25 }
+employeeDB> db.employeeDB.find()
+[
+  { _id: ObjectId('66432df99e30deaa4dd14a0e'), name: 'dhoni', age: 25 },
+  { _id: ObjectId('66432e539e30deaa4dd14a0f'), name: 'raj', age: 27 },
+  { _id: ObjectId('66432eb59e30deaa4dd14a10'), name: 'RAM', age: 41 },
+  { _id: ObjectId('66432ed99e30deaa4dd14a11'), name: 'abd', age: 41 },
+  {
+    _id: ObjectId('66432ed99e30deaa4dd14a12'),
+    name: 'sachin',
+    age: 35
+  }
+]
+employeeDB> db.employeeDB.updateOne({"name":"RAM"},{$set:{"name":"abd"}})
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+employeeDB> db.employeeDB.find()
+[
+  { _id: ObjectId('66432df99e30deaa4dd14a0e'), name: 'dhoni', age: 25 },
+  { _id: ObjectId('66432e539e30deaa4dd14a0f'), name: 'raj', age: 27 },
+  { _id: ObjectId('66432eb59e30deaa4dd14a10'), name: 'abd', age: 41 },
+  { _id: ObjectId('66432ed99e30deaa4dd14a11'), name: 'abd', age: 41 },
+  {
+    _id: ObjectId('66432ed99e30deaa4dd14a12'),
+    name: 'sachin',
+    age: 35
+  }
+]
+employeeDB> db.employeeDB.updateMany({"name":"abd"},{$set:{"name":"RAM"}})
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 2,
+  modifiedCount: 2,
+  upsertedCount: 0
+}
+employeeDB> db.employeeDB.find()
+[
+  { _id: ObjectId('66432df99e30deaa4dd14a0e'), name: 'dhoni', age: 25 },
+  { _id: ObjectId('66432e539e30deaa4dd14a0f'), name: 'raj', age: 27 },
+  { _id: ObjectId('66432eb59e30deaa4dd14a10'), name: 'RAM', age: 41 },
+  { _id: ObjectId('66432ed99e30deaa4dd14a11'), name: 'RAM', age: 41 },
+  {
+    _id: ObjectId('66432ed99e30deaa4dd14a12'),
+    name: 'sachin',
+    age: 35
+  }
+]
+employeeDB> db.employeeDB.deleteOne({"name":"RAM"})
+{ acknowledged: true, deletedCount: 1 }
+employeeDB> db.employeeDB.find()
+[
+  { _id: ObjectId('66432df99e30deaa4dd14a0e'), name: 'dhoni', age: 25 },
+  { _id: ObjectId('66432e539e30deaa4dd14a0f'), name: 'raj', age: 27 },
+  { _id: ObjectId('66432ed99e30deaa4dd14a11'), name: 'RAM', age: 41 },
+  {
+    _id: ObjectId('66432ed99e30deaa4dd14a12'),
+    name: 'sachin',
+    age: 35
+  }
+]
+employeeDB> db.employeeDB.insertOne({"name":"RAM","age":41})
+{
+  acknowledged: true,
+  insertedId: ObjectId('6643307c9e30deaa4dd14a13')
+}
+employeeDB> db.employeeDB.find()
+[
+  { _id: ObjectId('66432df99e30deaa4dd14a0e'), name: 'dhoni', age: 25 },
+  { _id: ObjectId('66432e539e30deaa4dd14a0f'), name: 'raj', age: 27 },
+  { _id: ObjectId('66432ed99e30deaa4dd14a11'), name: 'RAM', age: 41 },
+  {
+    _id: ObjectId('66432ed99e30deaa4dd14a12'),
+    name: 'sachin',
+    age: 35
+  },
+  { _id: ObjectId('6643307c9e30deaa4dd14a13'), name: 'RAM', age: 41 }
+]
+employeeDB> db.employeeDB.deleteMany({"name":"RAM"})
+{ acknowledged: true, deletedCount: 2 }
+employeeDB> db.employeeDB.find()
+[
+  { _id: ObjectId('66432df99e30deaa4dd14a0e'), name: 'dhoni', age: 25 },
+  { _id: ObjectId('66432e539e30deaa4dd14a0f'), name: 'raj', age: 27 },
+  {
+    _id: ObjectId('66432ed99e30deaa4dd14a12'),
+    name: 'sachin',
+    age: 35
+  }
+]
+employeeDB> db.employeeDB.insertOne({"name":"abcdef","age":35})
+{
+  acknowledged: true,
+  insertedId: ObjectId('664331289e30deaa4dd14a14')
+}
+employeeDB> db.employeeDB.find()
+[
+  { _id: ObjectId('66432df99e30deaa4dd14a0e'), name: 'dhoni', age: 25 },
+  { _id: ObjectId('66432e539e30deaa4dd14a0f'), name: 'raj', age: 27 },
+  {
+    _id: ObjectId('66432ed99e30deaa4dd14a12'),
+    name: 'sachin',
+    age: 35
+  },
+  {
+    _id: ObjectId('664331289e30deaa4dd14a14'),
+    name: 'abcdef',
+    age: 35
+  }
+]
+employeeDB> db.employeeDB.find()
+[
+  {
+    _id: ObjectId('66432df99e30deaa4dd14a0e'),
+    name: 'ms dhoni',
+    age: 25
+  },
+  { _id: ObjectId('66432e539e30deaa4dd14a0f'), name: 'raj', age: 27 },
+  {
+    _id: ObjectId('66432ed99e30deaa4dd14a12'),
+    name: 'sachin',
+    age: 35
+  },
+  {
+    _id: ObjectId('664331289e30deaa4dd14a14'),
+    name: 'abcdef',
+    age: 35
+  }
+]
+employeeDB> db.employeeDB.find()
+[
+  {
+    _id: ObjectId('66432df99e30deaa4dd14a0e'),
+    name: 'ms dhoni',
+    age: 25
+  },
+  { _id: ObjectId('66432e539e30deaa4dd14a0f'), name: 'raj', age: 27 },
+  {
+    _id: ObjectId('664331289e30deaa4dd14a14'),
+    name: 'abcdef',
+    age: 35
+  }
+]
+employeeDB>
+
+
+
