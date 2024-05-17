@@ -1,0 +1,777 @@
+employeeDB>
+
+employeeDB> show dbs
+admin       40.00 KiB
+config      72.00 KiB
+employeeDB  72.00 KiB
+local       72.00 KiB
+mobileDB    80.00 KiB
+santhoshDB  72.00 KiB
+test         8.00 KiB
+vasuDb      72.00 KiB
+employeeDB> db.employeeDB.find()
+[
+  {
+    _id: ObjectId('66432df99e30deaa4dd14a0e'),
+    name: 'ms dhoni',
+    age: 25
+  },
+  { _id: ObjectId('66432e539e30deaa4dd14a0f'), name: 'raj', age: 27 },
+  {
+    _id: ObjectId('664331289e30deaa4dd14a14'),
+    name: 'abcdef',
+    age: 35
+  }
+]
+employeeDB> db.employeeDB.insertOne({"name":"ram","age":35,"mobile":25465648})
+{
+  acknowledged: true,
+  insertedId: ObjectId('66471b712712d66e32d14a0e')
+}
+employeeDB> db.employeeDB.find()
+[
+  {
+    _id: ObjectId('66432df99e30deaa4dd14a0e'),
+    name: 'ms dhoni',
+    age: 25
+  },
+  { _id: ObjectId('66432e539e30deaa4dd14a0f'), name: 'raj', age: 27 },
+  {
+    _id: ObjectId('664331289e30deaa4dd14a14'),
+    name: 'abcdef',
+    age: 35
+  },
+  {
+    _id: ObjectId('66471b712712d66e32d14a0e'),
+    name: 'ram',
+    age: 35,
+    mobile: 25465648
+  }
+]
+employeeDB> db.employeeDB.deleteOne({"name":"ram"})
+{ acknowledged: true, deletedCount: 1 }
+employeeDB> db.employeeDB.find()
+[
+  {
+    _id: ObjectId('66432df99e30deaa4dd14a0e'),
+    name: 'ms dhoni',
+    age: 25
+  },
+  { _id: ObjectId('66432e539e30deaa4dd14a0f'), name: 'raj', age: 27 },
+  {
+    _id: ObjectId('664331289e30deaa4dd14a14'),
+    name: 'abcdef',
+    age: 35
+  }
+]
+employeeDB> db.employeeDB.deleteOne({"name":"raj"})
+{ acknowledged: true, deletedCount: 1 }
+employeeDB> db.employeeDB.deleteOne({"name":"abcdef"})
+{ acknowledged: true, deletedCount: 1 }
+employeeDB> db.employeeDB.find()
+[
+  {
+    _id: ObjectId('66432df99e30deaa4dd14a0e'),
+    name: 'ms dhoni',
+    age: 25
+  }
+]
+employeeDB> db.employeeDB.updateOne({"name":"ms dhoni"},{$set:{"name":"Dhoni","age":42,"email":"msd@gmail.com"}}
+... db.employeeDB.updateOne({"name":"ms dhoni"},{$set:{"name":"Dhoni","age":42,"email":"msd@gmail.com"}})
+Uncaught:
+SyntaxError: Unexpected token, expected "," (2:0)
+
+  1 | db.employeeDB.updateOne({"name":"ms dhoni"},{$set:{"name":"Dhoni","age":42,"email":"msd@gmail.com"}}
+> 2 | db.employeeDB.updateOne({"name":"ms dhoni"},{$set:{"name":"Dhoni","age":4
+employeeDB> db.employeeDB.updateOne({"name":"ms dhoni"},{$set:{"name":"Dhoni","age":42,"email":"msd@gmail.com"}})
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+employeeDB> db.employeeDB.find()
+[
+  {
+    _id: ObjectId('66432df99e30deaa4dd14a0e'),
+    name: 'Dhoni',
+    age: 42,
+    email: 'msd@gmail.com'
+  }
+]
+employeeDB> db.employeeDB.insertOne({"name":"Sachin","age":55,"email":"sachin@gmail.com"})
+{
+  acknowledged: true,
+  insertedId: ObjectId('66471d462712d66e32d14a0f')
+}
+employeeDB> db.employeeDB.find()
+[
+  {
+    _id: ObjectId('66432df99e30deaa4dd14a0e'),
+    name: 'Dhoni',
+    age: 42,
+    email: 'msd@gmail.com'
+  },
+  {
+    _id: ObjectId('66471d462712d66e32d14a0f'),
+    name: 'Sachin',
+    age: 55,
+    email: 'sachin@gmail.com'
+  }
+]
+employeeDB> db.employeeDB.updateOne({"name":"Dhoni"},{$set:{"name":"Dhoni","age":42,"email":"msd@gmail.com","score":75}})
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+employeeDB> db.employeeDB.updateOne({"name":"Sachin"},{$set:{"name":"Sachin","age":48,"email":"sachin@gmail.com","score":90}})
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+employeeDB> db.employeeDB.find()
+[
+  {
+    _id: ObjectId('66432df99e30deaa4dd14a0e'),
+    name: 'Dhoni',
+    age: 42,
+    email: 'msd@gmail.com',
+    score: 75
+  },
+  {
+    _id: ObjectId('66471d462712d66e32d14a0f'),
+    name: 'Sachin',
+    age: 48,
+    email: 'sachin@gmail.com',
+    score: 90
+  }
+]
+employeeDB> db.employeeDB.insertOne({"name":"Raj","age":35,"email":"raj@gmail.com","score":55})
+{
+  acknowledged: true,
+  insertedId: ObjectId('66471dbe2712d66e32d14a10')
+}
+employeeDB> db.employeeDB.find()
+[
+  {
+    _id: ObjectId('66432df99e30deaa4dd14a0e'),
+    name: 'Dhoni',
+    age: 42,
+    email: 'msd@gmail.com',
+    score: 75
+  },
+  {
+    _id: ObjectId('66471d462712d66e32d14a0f'),
+    name: 'Sachin',
+    age: 48,
+    email: 'sachin@gmail.com',
+    score: 90
+  },
+  {
+    _id: ObjectId('66471dbe2712d66e32d14a10'),
+    name: 'Raj',
+    age: 35,
+    email: 'raj@gmail.com',
+    score: 55
+  }
+]
+employeeDB> db.employeeDB.insertOne({"name":"Ram","age":25,"email":"ram@gmail.com","score":20})
+{
+  acknowledged: true,
+  insertedId: ObjectId('66471dd72712d66e32d14a11')
+}
+employeeDB> db.employeeDB.find()
+[
+  {
+    _id: ObjectId('66432df99e30deaa4dd14a0e'),
+    name: 'Dhoni',
+    age: 42,
+    email: 'msd@gmail.com',
+    score: 75
+  },
+  {
+    _id: ObjectId('66471d462712d66e32d14a0f'),
+    name: 'Sachin',
+    age: 48,
+    email: 'sachin@gmail.com',
+    score: 90
+  },
+  {
+    _id: ObjectId('66471dbe2712d66e32d14a10'),
+    name: 'Raj',
+    age: 35,
+    email: 'raj@gmail.com',
+    score: 55
+  },
+  {
+    _id: ObjectId('66471dd72712d66e32d14a11'),
+    name: 'Ram',
+    age: 25,
+    email: 'ram@gmail.com',
+    score: 20
+  }
+]
+employeeDB> db.employeeDB.find({$and:[{"name":"Ram"},{"email":"ram@gmail.com"}]})
+[
+  {
+    _id: ObjectId('66471dd72712d66e32d14a11'),
+    name: 'Ram',
+    age: 25,
+    email: 'ram@gmail.com',
+    score: 20
+  }
+]
+employeeDB> db.employeeDB.find({$and:[{"name":"Ram"},{"email":"raj@gmail.com"}]})
+
+employeeDB> db.employeeDB.find({$or:[{"name":"Ram"},{"email":"raj@gmail.com"}]})
+[
+  {
+    _id: ObjectId('66471dbe2712d66e32d14a10'),
+    name: 'Raj',
+    age: 35,
+    email: 'raj@gmail.com',
+    score: 55
+  },
+  {
+    _id: ObjectId('66471dd72712d66e32d14a11'),
+    name: 'Ram',
+    age: 25,
+    email: 'ram@gmail.com',
+    score: 20
+  }
+]
+employeeDB> db.employeeDB.find({$and:[{"score":"55"}]})
+
+employeeDB> db.employeeDB.find({$or:[{"score":"55"}]})
+
+employeeDB> db.vasudevan.find({score:{not:{$gt:70}}})
+
+employeeDB> db.vasudevan.find({score:{$gt:70}})
+
+employeeDB> db.vasudevan.find({$gt:{score:70}})
+MongoServerError[BadValue]: unknown top level operator: $gt. If you have a field name that starts with a '$' symbol, consider using $getField or $setField.
+employeeDB> db.vasudevan.find({score:{$not:{$gt:70}}})
+
+employeeDB> db.vasudevan.find({$and:[{score:{$gt:60}},{score:{$lte:90}}]})
+
+employeeDB> db.employeeDB.find()
+[
+  {
+    _id: ObjectId('66432df99e30deaa4dd14a0e'),
+    name: 'Dhoni',
+    age: 42,
+    email: 'msd@gmail.com',
+    score: 75
+  },
+  {
+    _id: ObjectId('66471d462712d66e32d14a0f'),
+    name: 'Sachin',
+    age: 48,
+    email: 'sachin@gmail.com',
+    score: 90
+  },
+  {
+    _id: ObjectId('66471dbe2712d66e32d14a10'),
+    name: 'Raj',
+    age: 35,
+    email: 'raj@gmail.com',
+    score: 55
+  },
+  {
+    _id: ObjectId('66471dd72712d66e32d14a11'),
+    name: 'Ram',
+    age: 25,
+    email: 'ram@gmail.com',
+    score: 20
+  }
+]
+employeeDB> db.vasudevan.find({$or:[{score:{$gt:60}},{score:{$lte:90}}]})
+
+employeeDB> db.vasudevan.find({score:{$gt:60}})
+
+employeeDB> db.employeeDB.find({score:{$gt:60}})
+[
+  {
+    _id: ObjectId('66432df99e30deaa4dd14a0e'),
+    name: 'Dhoni',
+    age: 42,
+    email: 'msd@gmail.com',
+    score: 75
+  },
+  {
+    _id: ObjectId('66471d462712d66e32d14a0f'),
+    name: 'Sachin',
+    age: 48,
+    email: 'sachin@gmail.com',
+    score: 90
+  }
+]
+employeeDB> db.employeeDB.find()
+[
+  {
+    _id: ObjectId('66432df99e30deaa4dd14a0e'),
+    name: 'Dhoni',
+    age: 42,
+    email: 'msd@gmail.com',
+    score: 75
+  },
+  {
+    _id: ObjectId('66471d462712d66e32d14a0f'),
+    name: 'Sachin',
+    age: 48,
+    email: 'sachin@gmail.com',
+    score: 90
+  },
+  {
+    _id: ObjectId('66471dbe2712d66e32d14a10'),
+    name: 'Raj',
+    age: 35,
+    email: 'raj@gmail.com',
+    score: 55
+  },
+  {
+    _id: ObjectId('66471dd72712d66e32d14a11'),
+    name: 'Ram',
+    age: 25,
+    email: 'ram@gmail.com',
+    score: 20
+  }
+]
+employeeDB> db.employeeDB.find({score:{$gt:60}})
+[
+  {
+    _id: ObjectId('66432df99e30deaa4dd14a0e'),
+    name: 'Dhoni',
+    age: 42,
+    email: 'msd@gmail.com',
+    score: 75
+  },
+  {
+    _id: ObjectId('66471d462712d66e32d14a0f'),
+    name: 'Sachin',
+    age: 48,
+    email: 'sachin@gmail.com',
+    score: 90
+  }
+]
+employeeDB> db.employeeDB.find({score:{$gt:90}})
+
+employeeDB> db.employeeDB.find({score:{$gte:90}})
+[
+  {
+    _id: ObjectId('66471d462712d66e32d14a0f'),
+    name: 'Sachin',
+    age: 48,
+    email: 'sachin@gmail.com',
+    score: 90
+  }
+]
+employeeDB> db.employeeDB.find({score:{$lt:50}})
+[
+  {
+    _id: ObjectId('66471dd72712d66e32d14a11'),
+    name: 'Ram',
+    age: 25,
+    email: 'ram@gmail.com',
+    score: 20
+  }
+]
+employeeDB> db.employeeDB.find({score:{$lt:20}})
+
+employeeDB> db.employeeDB.find({score:{$lte:20}})
+[
+  {
+    _id: ObjectId('66471dd72712d66e32d14a11'),
+    name: 'Ram',
+    age: 25,
+    email: 'ram@gmail.com',
+    score: 20
+  }
+]
+employeeDB> db.employeeDB.find({score:{$not:20}})
+MongoServerError[BadValue]: $not needs a regex or a document
+employeeDB> db.employeeDB.find({$not:{score:20}})
+MongoServerError[BadValue]: unknown top level operator: $not. If you are trying to negate an entire expression, use $nor.
+employeeDB> db.employeeDB.find({$nor:{score:20}})
+MongoServerError[BadValue]: $nor must be an array
+employeeDB> db.employeeDB.find({$nor:[{score:20}]})
+[
+  {
+    _id: ObjectId('66432df99e30deaa4dd14a0e'),
+    name: 'Dhoni',
+    age: 42,
+    email: 'msd@gmail.com',
+    score: 75
+  },
+  {
+    _id: ObjectId('66471d462712d66e32d14a0f'),
+    name: 'Sachin',
+    age: 48,
+    email: 'sachin@gmail.com',
+    score: 90
+  },
+  {
+    _id: ObjectId('66471dbe2712d66e32d14a10'),
+    name: 'Raj',
+    age: 35,
+    email: 'raj@gmail.com',
+    score: 55
+  }
+]
+employeeDB> db.employeeDB.find()
+[
+  {
+    _id: ObjectId('66432df99e30deaa4dd14a0e'),
+    name: 'Dhoni',
+    age: 42,
+    email: 'msd@gmail.com',
+    score: 75
+  },
+  {
+    _id: ObjectId('66471d462712d66e32d14a0f'),
+    name: 'Sachin',
+    age: 48,
+    email: 'sachin@gmail.com',
+    score: 90
+  },
+  {
+    _id: ObjectId('66471dbe2712d66e32d14a10'),
+    name: 'Raj',
+    age: 35,
+    email: 'raj@gmail.com',
+    score: 55
+  },
+  {
+    _id: ObjectId('66471dd72712d66e32d14a11'),
+    name: 'Ram',
+    age: 25,
+    email: 'ram@gmail.com',
+    score: 20
+  }
+]
+employeeDB> db.employeeDB.find({score:{$gt:20}})
+[
+  {
+    _id: ObjectId('66432df99e30deaa4dd14a0e'),
+    name: 'Dhoni',
+    age: 42,
+    email: 'msd@gmail.com',
+    score: 75
+  },
+  {
+    _id: ObjectId('66471d462712d66e32d14a0f'),
+    name: 'Sachin',
+    age: 48,
+    email: 'sachin@gmail.com',
+    score: 90
+  },
+  {
+    _id: ObjectId('66471dbe2712d66e32d14a10'),
+    name: 'Raj',
+    age: 35,
+    email: 'raj@gmail.com',
+    score: 55
+  }
+]
+employeeDB> db.employeeDB.find({$and:{mark:{$gt:60}}})
+MongoServerError[BadValue]: $and must be an array
+employeeDB> db.employeeDB.find({$and:[{mark:{$gt:60}}]})
+
+employeeDB> db.employeeDB.find({$and:[{score:{$gt:60}}]})
+[
+  {
+    _id: ObjectId('66432df99e30deaa4dd14a0e'),
+    name: 'Dhoni',
+    age: 42,
+    email: 'msd@gmail.com',
+    score: 75
+  },
+  {
+    _id: ObjectId('66471d462712d66e32d14a0f'),
+    name: 'Sachin',
+    age: 48,
+    email: 'sachin@gmail.com',
+    score: 90
+  }
+]
+employeeDB> db.employeeDB.find({$and:[{score:{$gt:60}},{score:{$gt:90}}]})
+
+employeeDB> db.employeeDB.find({$and:[{score:{$gt:60}},{score:{$lt:90}}]})
+[
+  {
+    _id: ObjectId('66432df99e30deaa4dd14a0e'),
+    name: 'Dhoni',
+    age: 42,
+    email: 'msd@gmail.com',
+    score: 75
+  }
+]
+employeeDB> db.employeeDB.find({$and:[{score:{$gt:60}},{score:{$lte:90}}]})
+[
+  {
+    _id: ObjectId('66432df99e30deaa4dd14a0e'),
+    name: 'Dhoni',
+    age: 42,
+    email: 'msd@gmail.com',
+    score: 75
+  },
+  {
+    _id: ObjectId('66471d462712d66e32d14a0f'),
+    name: 'Sachin',
+    age: 48,
+    email: 'sachin@gmail.com',
+    score: 90
+  }
+]
+employeeDB> db.employeeDB.find({score:{$not:{$gt:50}}})
+[
+  {
+    _id: ObjectId('66471dd72712d66e32d14a11'),
+    name: 'Ram',
+    age: 25,
+    email: 'ram@gmail.com',
+    score: 20
+  }
+]
+employeeDB> db.employeeDB.aggregate({$count:"employeeDB"})
+[ { employeeDB: 4 } ]
+employeeDB> db.employeeDB.insertOne({"name":"Satz","age":25,"email":"satz@gmail.com","score":50})
+{
+  acknowledged: true,
+  insertedId: ObjectId('664723662712d66e32d14a12')
+}
+employeeDB> db.employeeDB.find()
+[
+  {
+    _id: ObjectId('66432df99e30deaa4dd14a0e'),
+    name: 'Dhoni',
+    age: 42,
+    email: 'msd@gmail.com',
+    score: 75
+  },
+  {
+    _id: ObjectId('66471d462712d66e32d14a0f'),
+    name: 'Sachin',
+    age: 48,
+    email: 'sachin@gmail.com',
+    score: 90
+  },
+  {
+    _id: ObjectId('66471dbe2712d66e32d14a10'),
+    name: 'Raj',
+    age: 35,
+    email: 'raj@gmail.com',
+    score: 55
+  },
+  {
+    _id: ObjectId('66471dd72712d66e32d14a11'),
+    name: 'Ram',
+    age: 25,
+    email: 'ram@gmail.com',
+    score: 20
+  },
+  {
+    _id: ObjectId('664723662712d66e32d14a12'),
+    name: 'Satz',
+    age: 25,
+    email: 'satz@gmail.com',
+    score: 50
+  }
+]
+employeeDB> db.employeeDB.aggregate({$count:"employeeDB"})
+[ { employeeDB: 5 } ]
+employeeDB> db.employeeDB.updateOne({$inc:{score:50}})
+MongoInvalidArgumentError: Update document requires atomic operators
+employeeDB> db.employeeDB.updateOne({name:"Satz"},{$inc:{score:50}})
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+employeeDB> db.employeeDB.find()
+[
+  {
+    _id: ObjectId('66432df99e30deaa4dd14a0e'),
+    name: 'Dhoni',
+    age: 42,
+    email: 'msd@gmail.com',
+    score: 75
+  },
+  {
+    _id: ObjectId('66471d462712d66e32d14a0f'),
+    name: 'Sachin',
+    age: 48,
+    email: 'sachin@gmail.com',
+    score: 90
+  },
+  {
+    _id: ObjectId('66471dbe2712d66e32d14a10'),
+    name: 'Raj',
+    age: 35,
+    email: 'raj@gmail.com',
+    score: 55
+  },
+  {
+    _id: ObjectId('66471dd72712d66e32d14a11'),
+    name: 'Ram',
+    age: 25,
+    email: 'ram@gmail.com',
+    score: 20
+  },
+  {
+    _id: ObjectId('664723662712d66e32d14a12'),
+    name: 'Satz',
+    age: 25,
+    email: 'satz@gmail.com',
+    score: 100
+  }
+]
+employeeDB> db.employeeDB.updateOne({name:"Ram"},{$inc:{score:60}})
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+employeeDB> db.employeeDB.find()
+[
+  {
+    _id: ObjectId('66432df99e30deaa4dd14a0e'),
+    name: 'Dhoni',
+    age: 42,
+    email: 'msd@gmail.com',
+    score: 75
+  },
+  {
+    _id: ObjectId('66471d462712d66e32d14a0f'),
+    name: 'Sachin',
+    age: 48,
+    email: 'sachin@gmail.com',
+    score: 90
+  },
+  {
+    _id: ObjectId('66471dbe2712d66e32d14a10'),
+    name: 'Raj',
+    age: 35,
+    email: 'raj@gmail.com',
+    score: 55
+  },
+  {
+    _id: ObjectId('66471dd72712d66e32d14a11'),
+    name: 'Ram',
+    age: 25,
+    email: 'ram@gmail.com',
+    score: 80
+  },
+  {
+    _id: ObjectId('664723662712d66e32d14a12'),
+    name: 'Satz',
+    age: 25,
+    email: 'satz@gmail.com',
+    score: 100
+  }
+]
+employeeDB> db.employeeDB.updateOne({name:"Ram"},{$inc:{score:-50}})
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+employeeDB> db.employeeDB.find()
+[
+  {
+    _id: ObjectId('66432df99e30deaa4dd14a0e'),
+    name: 'Dhoni',
+    age: 42,
+    email: 'msd@gmail.com',
+    score: 75
+  },
+  {
+    _id: ObjectId('66471d462712d66e32d14a0f'),
+    name: 'Sachin',
+    age: 48,
+    email: 'sachin@gmail.com',
+    score: 90
+  },
+  {
+    _id: ObjectId('66471dbe2712d66e32d14a10'),
+    name: 'Raj',
+    age: 35,
+    email: 'raj@gmail.com',
+    score: 55
+  },
+  {
+    _id: ObjectId('66471dd72712d66e32d14a11'),
+    name: 'Ram',
+    age: 25,
+    email: 'ram@gmail.com',
+    score: 30
+  },
+  {
+    _id: ObjectId('664723662712d66e32d14a12'),
+    name: 'Satz',
+    age: 25,
+    email: 'satz@gmail.com',
+    score: 100
+  }
+]
+employeeDB> db.employeeDB.updateOne({name:"Satz"},{$inc:{score:-10}})
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+employeeDB> db.employeeDB.find()
+[
+  {
+    _id: ObjectId('66432df99e30deaa4dd14a0e'),
+    name: 'Dhoni',
+    age: 42,
+    email: 'msd@gmail.com',
+    score: 75
+  },
+  {
+    _id: ObjectId('66471d462712d66e32d14a0f'),
+    name: 'Sachin',
+    age: 48,
+    email: 'sachin@gmail.com',
+    score: 90
+  },
+  {
+    _id: ObjectId('66471dbe2712d66e32d14a10'),
+    name: 'Raj',
+    age: 35,
+    email: 'raj@gmail.com',
+    score: 55
+  },
+  {
+    _id: ObjectId('66471dd72712d66e32d14a11'),
+    name: 'Ram',
+    age: 25,
+    email: 'ram@gmail.com',
+    score: 30
+  },
+  {
+    _id: ObjectId('664723662712d66e32d14a12'),
+    name: 'Satz',
+    age: 25,
+    email: 'satz@gmail.com',
+    score: 90
+  }
+]
+employeeDB>
+
